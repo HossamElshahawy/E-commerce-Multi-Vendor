@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>:: Lucid University :: Login</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -35,15 +35,14 @@
                     </div>
                     <div class="body">
                         <form class="form-auth-small" method="POST" action="{{ route('login') }}">
-                            @csrf
-{{--                            <div class="form-group">--}}
-{{--                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login For</button>--}}
-{{--                                <div class="dropdown-menu">--}}
-{{--                                    <a class="dropdown-item" href="javascript:void(0);">Admin</a>--}}
-{{--                                    <a class="dropdown-item" href="javascript:void(0);">Professors</a>--}}
-{{--                                    <a class="dropdown-item" href="javascript:void(0);">Student</a>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
+                            <div class="form-group">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login For</button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0);">Admin</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Professors</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Student</a>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label for="signin-email" class="control-label sr-only">Email</label>
                                 <input name="email"  type="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email" required autocomplete="email" autofocus>
@@ -55,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="signin-password" class="control-label sr-only">Password</label>
-                                <input id="password" placeholder="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -70,11 +69,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                             <div class="bottom">
-                                <span class="helper-text m-b-10"><i class="fa fa-lock"></i>
-                                     @if (Route::has('password.request'))
-                                    <a href="{{ route('password.request') }}">Forgot password?</a>
-                                    @endif
-                                </span>
+                                <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Forgot password?</a></span>
                                 <span>Don't have an account? <a href="page-register.html">Register</a></span>
                             </div>
                         </form>
