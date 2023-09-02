@@ -49,7 +49,7 @@
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Banner Management</span> </a>
                             <ul>
                                 <li><a href="departments.html">All Banner</a></li>
-                                <li><a href="add-departments.html">All Banner</a></li>
+                                <li><a href="{{route('banner.create')}}">Create Banner</a></li>
                             </ul>
                         </li>
 

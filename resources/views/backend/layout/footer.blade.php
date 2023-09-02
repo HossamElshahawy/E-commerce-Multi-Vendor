@@ -8,3 +8,7 @@
 <script src="{{asset('backend/assets/bundles/mainscripts.bundle.js')}}"></script>
 <script src="{{asset('backend/assets/js/pages/ui/sortable-nestable.js')}}"></script>
 <script src="{{asset('backend/assets/js/index.js')}}"></script>
+
+
+
+@yield('scripts')
