@@ -14,10 +14,12 @@
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css')}}">
 <link rel="stylesheet" href="{{asset('backend/assets/vendor/morrisjs/morris.min.css')}}" />
 
+<!-- SummerNote CSS -->
+<link href="https://cdn.jsdelivr.xyz/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
 <!-- MAIN CSS -->
 <link rel="stylesheet" href="{{asset('backend/assets/css/main.css')}}">
 <link rel="stylesheet" href="{{asset('backend/assets/css/color_skins.css')}}">
 <style>
-    .icon-menu:before{display:none !important};
+    .icon-menu:before{display:none !important}
 </style>

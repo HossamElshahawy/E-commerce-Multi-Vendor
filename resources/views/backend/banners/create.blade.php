@@ -84,7 +84,7 @@
 
                             <div class="col-sm-12">
                                 <div class="form-group mt-3">
-                                    <textarea rows="4" name="description" class="form-control no-resize" placeholder="Description">{{old('description')}}</textarea>
+                                    <textarea  id="description" rows="4" name="description" class="form-control no-resize" placeholder="Description">{{old('description')}}</textarea>
                                 </div>
                             </div>
 
@@ -109,5 +109,13 @@
 
     <script>
         $('#lfm').filemanager('image');
+    </script>
+
+    <script src="https://cdn.jsdelivr.xyz/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#description').summernote();
+        });
     </script>
 @endsection
