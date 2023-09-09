@@ -10,5 +10,11 @@
 <script src="{{asset('backend/assets/js/index.js')}}"></script>
 
 
+{{--toastr js--}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+{{--switch-button js--}}
+<script src="https://cdn.jsdelivr.xyz/gh/gitbrent/bootstrap-switch-button@1.1.0/dist/bootstrap-switch-button.min.js"></script>
+
 
 @yield('scripts')

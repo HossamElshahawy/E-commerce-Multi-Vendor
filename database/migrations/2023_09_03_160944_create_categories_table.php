@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
+            $table->string('photo')->nullable();
             $table->mediumText('summary')->nullable();
-            $table->string('photo');
+            $table->boolean('is_parent')->default(true);
             $table->enum('status',['active','inactive'])->default('active');
-            $table->enum('condition',['banner','promo'])->default('banner');
+
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('SET NULL');
+
 
             $table->timestamps();
         });
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('categories');
     }
 };

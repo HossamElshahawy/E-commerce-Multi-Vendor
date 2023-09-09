@@ -8,16 +8,16 @@
                 <div class="col-lg-12 col-md-8 col-sm-12">
                     <h2>
 
-                        <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Banners
-                        <a href="{{route('banner.create')}}" class="btn btn-sm btn-outline-secondary"><i class="icon-plus"></i> Create</a>
+                        <a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Brands
+                        <a href="{{route('brand.create')}}" class="btn btn-sm btn-outline-secondary"> <i class="icon-plus"></i> Create</a>
 
                     </h2>
 
                     <ul class="breadcrumb float-left">
                         <li class="breadcrumb-item"><a href="{{route('admin')}}"><i class="icon-home"></i></a></li>
-                        <li class="breadcrumb-item active">Banner Management</li>
+                        <li class="breadcrumb-item active">Brand Management</li>
                     </ul>
-                    <p class="float-right">Total Banners : {{\App\Models\Banner::count()}}</p>
+                    <p class="float-right">Total Brands : {{\App\Models\Brand::count()}}</p>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="header">
-                        <h2><strong>Banners</strong> List</h2>
+                        <h2><strong>Brands</strong> List</h2>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
@@ -36,44 +36,34 @@
                                     <th>No.</th>
                                     <th>Title</th>
                                     <th>Slug</th>
-                                    <th>Summary</th>
                                     <th>Image</th>
-                                    <th>Condition</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($banners as $banner)
+                                @foreach($brands as $brand)
 
                                     <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$banner->title}}</td>
-                                    <td>{{$banner->slug}}</td>
-                                    <td>{!! $banner->summary !!}</td>
-                                    <td><img src="{{$banner->photo}}" width="120" height="90"></td>
-                                        <td>
-                                        @if($banner->condition == 'banner')
-                                            <span class="badge badge-success">{{$banner->condition}}</span>
-                                        @else
-                                            <span class="badge badge-primary">{{$banner->condition}}</span>
-
-                                        @endif
-                                        </td>
+                                    <td>{{$brand->title}}</td>
+                                    <td>{{$brand->slug}}</td>
+                                    <td>
+                                        <img src="{{$brand->photo}}" width="120" height="90">
+                                    </td>
 
                                     <td>
-                                        <input type="checkbox" name="toogle" value="{{$banner->id}}" data-toggle="switchbutton" {{$banner->status=='active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-size="small" data-onstyle="success" data-offstyle="danger">
-
+                                        <input type="checkbox" name="toogle" value="{{$brand->id}}" data-toggle="switchbutton" {{$brand->status=='active' ? 'checked' : ''}} data-onlabel="active" data-offlabel="inactive" data-size="small" data-onstyle="success" data-offstyle="danger">
                                     </td>
 
 
                                     <td>
-                                        <a  href="{{route('banner.edit',$banner->id)}}" data-toggle="tooltip" class="float-left btn btn-sm btn-outline-warning" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                                        <form class="float-left ml-2" method="post" action="{{route('banner.destroy',$banner->id)}}">
+                                        <a  href="{{route('brand.edit',$brand->id)}}" data-toggle="tooltip" class="float-left btn btn-sm btn-outline-warning" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                                        <form class="float-left ml-2" method="post" action="{{route('brand.destroy',$brand->id)}}">
                                             @csrf
                                             @method('DELETE')
 
-                                            <a href="" data-toggle="tooltip" class="float-left deleteButton btn btn-sm btn-outline-danger" data-id="{{$banner->id}}" title="Delete" data-placement="bottom"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="" data-toggle="tooltip" class="float-left deleteButton btn btn-sm btn-outline-danger" data-id="{{$brand->id}}" title="Delete" data-placement="bottom"><i class="fas fa-trash-alt"></i></a>
 
 
                                         </form>
@@ -101,7 +91,7 @@
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-{{--    delete button--}}
+{{--    delete script--}}
     <script>
         $.ajaxSetup({
             headers: {
@@ -116,7 +106,7 @@
 
             swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this Banner!",
+                text: "Once deleted, you will not be able to recover this imaginary file!",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
@@ -124,7 +114,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         form.submit();
-                        swal("Poof! Your Banner has been deleted!", {
+                        swal("Poof! Your imaginary file has been deleted!", {
                             icon: "success",
                         });
                     } else {
@@ -132,17 +122,20 @@
                     }
                 });
 
+
+
+
         });
+
     </script>
 
-{{--    status script--}}
     <script>
         $('input[name=toogle]').change(function () {
             var mode = $(this).prop('checked');
-            var id = $(this).val();
 
+            var id = $(this).val();
             $.ajax({
-                url: "{{ route('banner.status') }}", // Use the route name
+                url: "{{ route('brand.status') }}", // Use the route name
                 type: "POST",
                 data: {
                     _token: "{{ csrf_token() }}",
@@ -156,31 +149,5 @@
         });
     </script>
 
-
-{{--    toastr script--}}
-    @if(Session::has('success'))
-        <script>
-            // Initialize Toastr
-            toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-            // Example usage:
-            toastr.success("{{Session::get('success')}}");
-        </script>
-    @endif
 
 @endsection

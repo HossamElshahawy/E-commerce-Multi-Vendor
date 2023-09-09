@@ -48,22 +48,28 @@
 
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-picture"></i><span>Banner Management</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Banner</a></li>
+                                <li><a href="{{route('banner.index')}}">All Banner</a></li>
                                 <li><a href="{{route('banner.create')}}">Create Banner</a></li>
                             </ul>
                         </li>
 
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Category Management</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Category</a></li>
-                                <li><a href="add-departments.html">Add Category</a></li>
+                                <li><a href="{{route('category.index')}}">All Category</a></li>
+                                <li><a href="{{route('category.create')}}">Add Category</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-organization"></i><span>Brand Management</span> </a>
+                            <ul>
+                                <li><a href="{{route('brand.index')}}">All Brand</a></li>
+                                <li><a href="{{route('brand.create')}}">Add Brand</a></li>
                             </ul>
                         </li>
 
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-bag"></i><span>Product Management</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Products</a></li>
-                                <li><a href="add-departments.html">Add Products</a></li>
+                                <li><a href="{{route('product.index')}}">All Products</a></li>
+                                <li><a href="{{route('product.create')}}">Add Product</a></li>
                             </ul>
                         </li>
 
@@ -125,8 +131,8 @@
 
                         <li><a href="javascript:void(0);" class="has-arrow"><i class="icon-people"></i><span>User Management</span> </a>
                             <ul>
-                                <li><a href="departments.html">All Review Management</a></li>
-                                <li><a href="add-departments.html">Add Review Management</a></li>
+                                <li><a href="{{route('user.index')}}">All Users</a></li>
+                                <li><a href="{{route('user.create')}}">Create User</a></li>
                             </ul>
                         </li>
 

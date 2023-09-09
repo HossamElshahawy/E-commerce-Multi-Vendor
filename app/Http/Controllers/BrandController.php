@@ -2,91 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class BannerController extends Controller
+class BrandController extends Controller
 {
 
     public function index()
     {
-        $banners = Banner::orderBy('id','DESC')->get();
-        return view('backend.banners.index',compact('banners'));
-    }
+        $brands = Brand::orderBy('id','DESC')->get();
+        return view('backend.brands.index',compact('brands'));
 
+    }
 
     public function create()
     {
-        return view('backend.banners.create');
-
+        return view('backend.brands.create');
     }
-
 
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'title'=>'string|required',
-            'slug'=>'string|required|unique:banners,slug',
-            'summary'=>'string|nullable',
             'photo'=>'required',
-            'condition'=>'nullable|in:banner,promo',
             'status'=>'nullable|in:active,inactive',
         ]);
 
         $data = $request->all();
+        $slug = Str::slug($request->input('title'));
+        $slug_count = Brand::where('slug',$slug)->count();
+        if ($slug_count>0)
+        {
+            $slug .= time().'-'.$slug;
+        }
+        $data['slug']=$slug;
 
-        $status = Banner::create($data);
+        $status = Brand::create($data);
         if ($status){
 //            return redirect()->route('banner.index');
-            return redirect()->back()->with('success','banner added successfuly');
+            return redirect()->back()->with('success','brand added successfuly');
         }
         return redirect()->back()->with('error','there is error');
-
-
     }
-
 
     public function show(string $id)
     {
         //
     }
 
-
-    public function edit($id)
+    public function edit(string $id)
     {
-        $banner = Banner::findOrFail($id);
-        if ($banner)
+        $brand = Brand::findOrFail($id);
+        if ($brand)
         {
-            return view('backend.banners.edit',compact('banner'));
+            return view('backend.brands.edit',compact('brand'));
         }else{
             return redirect()->back()->with('error','Data Not Found');
         }
     }
 
-
     public function update(Request $request, string $id)
     {
-        $banner = Banner::findOrFail($id);
-        if ($banner) {
+        $brand = Brand::findOrFail($id);
+        if ($brand) {
 
             $this->validate($request, [
                 'title' => 'string|required',
-                'slug'=>'string|unique:banners,slug',
-                'summary' => 'string|nullable',
                 'photo' => 'required',
-                'condition' => 'nullable|in:banner,promo',
                 'status' => 'nullable|in:active,inactive',
             ]);
 
             $data = $request->all();
+            $slug = Str::slug($request->input('title'));
+            $slug_count = Brand::where('slug', $slug)->count();
+            if ($slug_count > 0) {
+                $slug .= time() . '-' . $slug;
+            }
+            $data['slug'] = $slug;
 
-
-            $status = $banner->fill($data)->save();
+            $status = $brand->fill($data)->save();
             if ($status) {
-                return redirect()->route('banner.index')->with('success', 'banner Updated successfuly');
+                return redirect()->route('brand.index')->with('success', 'brand added successfuly');
             } else {
                 return redirect()->back()->with('error', 'there is error');
             }
@@ -99,32 +97,33 @@ class BannerController extends Controller
 
     public function destroy(string $id)
     {
-        $banner = Banner::findOrFail($id);
-        if ($banner)
+        $brand = Brand::findOrFail($id);
+        if ($brand)
         {
-            $status = $banner->delete();
+            $status = $brand->delete();
             if ($status)
             {
-                return redirect()->route('banner.index')->with('success', 'banner deleted successfuly');
+                return redirect()->route('brand.index')->with('success', 'brand deleted successfuly');
             }else
             {
                 return redirect()->back()->with('error', 'there is error');
             }
         }
         return redirect()->back()->with('error', 'Data Not Found');
-
     }
 
-    public function bannerStatus(Request $request)
+
+    public function brandStatus(Request $request)
     {
         if ($request->mode=='true')
         {
-            DB::table('banners')->where('id',$request->id)->update(['status'=>'active']);
+            DB::table('brands')->where('id',$request->id)->update(['status'=>'active']);
         }
         else
         {
-            DB::table('banners')->where('id',$request->id)->update(['status'=>'inactive']);
+            DB::table('brands')->where('id',$request->id)->update(['status'=>'inactive']);
         }
         return response()->json(['msg'=>'Successfuly updated','status'=>true]);
     }
+
 }
