@@ -4,12 +4,18 @@ use Illuminate\Support\Facades\Route;
 
 
 
-////FrontEndSection
-//
-//Route::get('/test', [\App\Http\Controllers\Frontend\IndexController::class, 'index'])->name('test');
-//
-//
-////EndFrontEndSection
+//FrontEndSection
+
+Route::get('/test', [\App\Http\Controllers\Frontend\IndexController::class, 'index'])->name('test');
+
+//ProductCategory
+
+Route::get('/product/category/{slug}', [\App\Http\Controllers\Frontend\IndexController::class, 'productCategory'])->name('product.category');
+
+//EndProductCategory
+
+
+//EndFrontEndSection
 
 Route::get('/', function () {
     return view('welcome');
