@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Route;
 
 //FrontEndSection
 
-Route::get('/test', [\App\Http\Controllers\Frontend\IndexController::class, 'index'])->name('test');
+Route::get('/', [\App\Http\Controllers\Frontend\IndexController::class, 'index'])->name('home.frontend');
 
 //ProductCategory
-
 Route::get('/product/category/{slug}', [\App\Http\Controllers\Frontend\IndexController::class, 'productCategory'])->name('product.category');
-
 //EndProductCategory
+
+//ProductDetails
+Route::get('/product-detail/{slug}', [\App\Http\Controllers\Frontend\IndexController::class, 'productDetails'])->name('product.details');
+//EndProductDetails
 
 
 //EndFrontEndSection
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
