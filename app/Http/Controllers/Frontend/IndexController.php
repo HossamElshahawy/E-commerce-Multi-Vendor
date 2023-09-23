@@ -19,6 +19,46 @@ class IndexController extends Controller
         return view('frontend.index',compact('banners','categories','new_products'));
     }
 
+//    public function productCategory(Request $request ,$slug)
+//    {
+//
+//        $categories = Category::with('products')->where('slug',$slug)->first();
+//
+//       $sort= '';
+//       if ($request->sort !=null)
+//       {
+//           $sort = $request->sort;
+//       }
+//       if ($categories==null)
+//       {
+//           abort(404);
+//       }
+//       else{
+//           if ($sort == 'priceDesc')
+//           {
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('offer_price','DESC')->paginate(12);
+//           }elseif($sort == 'priceAsc'){
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('offer_price','ASC')->paginate(12);
+//           }elseif($sort == 'discAsc'){
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('price','ASC')->paginate(12);
+//           }elseif($sort == 'discDesc'){
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('price','DESC')->paginate(12);
+//           }elseif($sort == 'titleAsc'){
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('title','ASC')->paginate(12);
+//           }elseif($sort == 'titleDesc'){
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->orderBy('title','DESC')->paginate(12);
+//           }else{
+//               $product = Product::where(['status'=>'active','category_id'=>$categories->id])->paginate(12);
+//
+//           }
+//       }
+//
+//
+//
+//        $route = 'product/category';
+//        return view('frontend.pages.product.product-category',compact('categories','route','product'));
+//    }
+
     public function productCategory($slug)
     {
 
@@ -28,7 +68,7 @@ class IndexController extends Controller
 
     public function productDetails($slug)
     {
-        $product = Product::where('slug',$slug)->first();
+        $product = Product::with('relatedProducts')->where('slug',$slug)->first();
         if ($product)
         {
             return view('frontend.pages.product.product-details',compact('product'));
@@ -38,4 +78,6 @@ class IndexController extends Controller
             return 'Product Detail Not Found';
         }
     }
+
+
 }

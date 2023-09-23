@@ -82,8 +82,6 @@ class BannerController extends Controller
             ]);
 
             $data = $request->all();
-
-
             $status = $banner->fill($data)->save();
             if ($status) {
                 return redirect()->route('banner.index')->with('success', 'banner Updated successfuly');

@@ -3,6 +3,13 @@
 use Illuminate\Support\Facades\Route;
 
 
+//AuthFrontEnd
+Route::get('user/auth', [\App\Http\Controllers\Frontend\AuthController::class, 'userAuth'])->name('user.auth');
+Route::post('user/login',[\App\Http\Controllers\Frontend\AuthController::class,'userLogin'])->name('user.login');
+Route::post('user/register',[\App\Http\Controllers\Frontend\AuthController::class,'userRegister'])->name('user.register');
+Route::post('user/logout',[\App\Http\Controllers\Frontend\AuthController::class,'userLogout'])->name('user.logout');
+
+//EndAuthFrontEnd
 
 //FrontEndSection
 
@@ -17,6 +24,16 @@ Route::get('/product-detail/{slug}', [\App\Http\Controllers\Frontend\IndexContro
 //EndProductDetails
 
 
+//CartSection
+Route::get('/cart', [\App\Http\Controllers\Frontend\CartController::class, 'cart'])->name('cart');
+
+Route::post('/cart/store', [\App\Http\Controllers\Frontend\CartController::class, 'cartStore'])->name('cart.store');
+Route::post('/cart/delete', [\App\Http\Controllers\Frontend\CartController::class, 'cartDelete'])->name('cart.delete');
+
+
+//EndCartSection
+
+
 //EndFrontEndSection
 
 
@@ -26,7 +43,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Admin
-Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
+Route::group(['prefix'=>'admin','middleware'=>['auth','admin']],function (){
     Route::get('/',[\App\Http\Controllers\AdminController::class,'admin'])->name('admin');
 
     //Banner Section
@@ -51,5 +68,30 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function (){
     //Users Section
     Route::resource('user',\App\Http\Controllers\UsersController::class);
     Route::post('user_status',[\App\Http\Controllers\UsersController::class,'userStatus'])->name('user.status');
+
+    //Coupon Section
+    Route::resource('coupon',\App\Http\Controllers\CouponController::class);
+    Route::post('coupon_status',[\App\Http\Controllers\CouponController::class,'couponStatus'])->name('coupon.status');
+
+});
+
+//Seller
+Route::group(['prefix'=>'seller','middleware'=>['auth','seller']],function (){
+    Route::get('/',[\App\Http\Controllers\AdminController::class,'admin'])->name('seller');
+});
+
+
+//user
+Route::group(['prefix'=>'user'],function (){
+    Route::get('/dashboard',[\App\Http\Controllers\Frontend\DashboardController::class,'index'])->name('user.dashboard');
+    Route::get('/order',[\App\Http\Controllers\Frontend\DashboardController::class,'userOrder'])->name('user.order');
+    Route::get('/address',[\App\Http\Controllers\Frontend\DashboardController::class,'userAddress'])->name('user.address');
+    Route::get('/account/details',[\App\Http\Controllers\Frontend\DashboardController::class,'userAccount'])->name('user.account');
+
+    Route::post('/billing/address/{id}',[\App\Http\Controllers\Frontend\DashboardController::class,'billingAddress'])->name('billing.address');
+    Route::post('/shipping/address/{id}',[\App\Http\Controllers\Frontend\DashboardController::class,'shippingAddress'])->name('shipping.address');
+
+    Route::post('/update/account/{id}',[\App\Http\Controllers\Frontend\DashboardController::class,'updateAccount'])->name('update.account');
+
 
 });

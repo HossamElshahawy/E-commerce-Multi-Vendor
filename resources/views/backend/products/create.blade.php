@@ -184,7 +184,7 @@
                                     <select name="vendor_id" class="form-control show-tick">
                                         <label for="">Vendor <span class="text-danger">*</span></label>
                                         <option  >-- Vendor --</option>
-                                        @foreach(\App\Models\User::where('role','vendor')->get() as $vendor)
+                                        @foreach(\App\Models\User::where('role','seller')->get() as $vendor)
                                             <option value="{{$vendor->id}}">{{$vendor->full_name}}</option>
                                         @endforeach
 
@@ -210,11 +210,6 @@
 
                                     </div>
                                 </div>
-
-
-
-
-
 
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <label for="Condition">Status<span>*</span></label>

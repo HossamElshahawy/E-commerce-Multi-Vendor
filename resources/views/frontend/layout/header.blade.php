@@ -1,4 +1,3 @@
-<header class="header_area">
     <!-- Top Header Area -->
     <div class="top-header-area">
         <div class="container h-100">
@@ -70,94 +69,9 @@
                         <!-- Nav -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="#">Home</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index-1.html">Home - 1</a></li>
-                                        <li><a href="index-2.html">Home - 2</a></li>
-                                        <li><a href="index-3.html">Home - 3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Shop</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Shop Grid</a>
-                                            <ul class="dropdown">
-                                                <li><a href="shop-grid-left-sidebar.html">Shop Grid Left Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-grid-right-sidebar.html">Shop Grid Right
-                                                        Sidebar</a></li>
-                                                <li><a href="shop-grid-top-sidebar.html">Shop Grid Top Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-grid-no-sidebar.html">Shop Grid No Sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Shop List</a>
-                                            <ul class="dropdown">
-                                                <li><a href="shop-list-left-sidebar.html">Shop List Left Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-list-right-sidebar.html">Shop List Right
-                                                        Sidebar</a></li>
-                                                <li><a href="shop-list-top-sidebar.html">Shop List Top Sidebar</a>
-                                                </li>
-                                                <li><a href="shop-list-no-sidebar.html">Shop List No Sidebar</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="product-details.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="#">Checkout</a>
-                                            <ul class="dropdown">
-                                                <li><a href="checkout-1.html">Login</a></li>
-                                                <li><a href="checkout-2.html">Billing</a></li>
-                                                <li><a href="checkout-3.html">Shipping Method</a></li>
-                                                <li><a href="checkout-4.html">Payment Method</a></li>
-                                                <li><a href="checkout-5.html">Review</a></li>
-                                                <li><a href="checkout-complate.html">Complate</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Account Page</a>
-                                            <ul class="dropdown">
-                                                <li><a href="my-account.html">- Dashboard</a></li>
-                                                <li><a href="order-list.html">- Orders</a></li>
-                                                <li><a href="downloads.html">- Downloads</a></li>
-                                                <li><a href="addresses.html">- Addresses</a></li>
-                                                <li><a href="account-details.html">- Account Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="compare.html">Compare</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Pages</a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="about-us.html">- About Us</a></li>
-                                            <li><a href="faq.html">- FAQ</a></li>
-                                            <li><a href="contact.html">- Contact</a></li>
-                                            <li><a href="login.html">- Login &amp; Register</a></li>
-                                            <li><a href="404.html">- 404</a></li>
-                                            <li><a href="500.html">- 500</a></li>
-                                        </ul>
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="my-account.html">- Dashboard</a></li>
-                                            <li><a href="order-list.html">- Orders</a></li>
-                                            <li><a href="downloads.html">- Downloads</a></li>
-                                            <li><a href="addresses.html">- Addresses</a></li>
-                                            <li><a href="account-details.html">- Account Details</a></li>
-                                            <li><a href="coming-soon.html">- Coming Soon</a></li>
-                                        </ul>
-                                        <div class="single-mega cn-col-2">
-                                            <div class="megamenu-slides owl-carousel">
-                                                <a href="shop-grid-left-sidebar.html">
-                                                    <img src="img/bg-img/mega-slide-2.jpg" alt="">
-                                                </a>
-                                                <a href="shop-list-left-sidebar.html">
-                                                    <img src="img/bg-img/mega-slide-1.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                <li><a href="{{route('home.frontend')}}">Home</a></li>
+                                <li><a href="#">Shop</a></li>
+
                                 <li><a href="#">Blog</a>
                                     <ul class="dropdown">
                                         <li><a href="blog-with-left-sidebar.html">Blog Left Sidebar</a></li>
@@ -218,55 +132,48 @@
 
                         <!-- Cart -->
                         <div class="cart-area">
-                            <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">2</span>
+                            <div class="cart--btn"><i class="icofont-cart"></i> <span class="cart_quantity">{{\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->count()}}</span>
                             </div>
 
                             <!-- Cart Dropdown Content -->
                             <div class="cart-dropdown-content">
                                 <ul class="cart-list">
+
+                                    @foreach(\Gloudemans\Shoppingcart\Facades\Cart::instance('shopping')->content() as $item)
+
                                     <li>
                                         <div class="cart-item-desc">
                                             <a href="#" class="image">
-                                                <img src="img/product-img/top-1.png" class="cart-thumb" alt="">
+                                                <img src="{{$item->model->photo}}" class="cart-thumb" alt="">
                                             </a>
                                             <div>
-                                                <a href="#">Kid's Fashion</a>
-                                                <p>1 x - <span class="price">$32.99</span></p>
+                                                <a href="{{route('product.details',$item->model->slug)}}">{{$item->name}}</a>
+                                                <p> {{$item->qty}} x - <span class="price">{{number_format($item->price,2)}}</span></p>
                                             </div>
                                         </div>
-                                        <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
+                                        <span class="dropdown-product-remove cart_delete" data-id="{{$item->rowId}}"><i class="icofont-bin"></i></span>
                                     </li>
-                                    <li>
-                                        <div class="cart-item-desc">
-                                            <a href="#" class="image">
-                                                <img src="img/product-img/best-4.png" class="cart-thumb" alt="">
-                                            </a>
-                                            <div>
-                                                <a href="#">Headphone</a>
-                                                <p>2x - <span class="price">$49.99</span></p>
-                                            </div>
-                                        </div>
-                                        <span class="dropdown-product-remove"><i class="icofont-bin"></i></span>
-                                    </li>
+                                    @endforeach
+
+
                                 </ul>
                                 <div class="cart-pricing my-4">
                                     <ul>
                                         <li>
                                             <span>Sub Total:</span>
-                                            <span>$822.96</span>
+                                            <span>{{\Gloudemans\Shoppingcart\Facades\Cart::subTotal()}}</span>
                                         </li>
-                                        <li>
-                                            <span>Shipping:</span>
-                                            <span>$30.00</span>
-                                        </li>
+
                                         <li>
                                             <span>Total:</span>
-                                            <span>$856.63</span>
+                                            <span>{{\Gloudemans\Shoppingcart\Facades\Cart::Total()}}</span>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="cart-box">
-                                    <a href="checkout-1.html" class="btn btn-primary d-block">Checkout</a>
+                                    <a href="{{route('cart')}}" class="btn btn-success btn-sm">Cart</a>
+                                    <a href="checkout-1.html" class="btn btn-primary btn-sm float-right">Checkout</a>
+
                                 </div>
                             </div>
                         </div>
@@ -274,14 +181,24 @@
                         <!-- Account -->
                         <div class="account-area">
                             <div class="user-thumbnail">
-                                <img src="img/bg-img/user.jpg" alt="">
+{{--                                @if(auth()->user()->photo)--}}
+{{--                                    <img src="{{auth()->user()->photo}}" alt="">--}}
+{{--                                @else--}}
+{{--                                    <img src="{{\App\Utilities\Helpers::userDefaultImage()}}" alt="">--}}
+{{--                                @endif--}}
+
                             </div>
                             <ul class="user-meta-dropdown">
-                                <li class="user-title"><span>Hello,</span> Lim Sarah</li>
-                                <li><a href="my-account.html">My Account</a></li>
-                                <li><a href="order-list.html">Orders List</a></li>
+                                @auth
+                                <li class="user-title"><span>Hello,</span> {{auth()->user()->username}}</li>
+                                <li><a href="{{route('user.dashboard')}}">My Account</a></li>
+                                <li><a href="{{route('user.order')}}">Orders List</a></li>
                                 <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="login.html"><i class="icofont-logout"></i> Logout</a></li>
+                                <li><a href="{{route('user.logout')}}"><i class="icofont-logout"></i> Logout</a></li>
+                                @else
+                                    <li><a href="{{route('user.auth')}}">Login & Register</a></li>
+
+                                @endauth
                             </ul>
                         </div>
                     </div>
@@ -289,4 +206,3 @@
             </div>
         </div>
     </div>
-</header>

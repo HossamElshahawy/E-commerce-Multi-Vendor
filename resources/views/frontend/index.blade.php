@@ -42,11 +42,11 @@
     <!-- Welcome Slides Area -->
 
     <!-- Top Catagory Area -->
-    @if(count($banners)>0)
 
         <div class="top_catagory_area mt-50 clearfix">
         <div class="container">
             <div class="row">
+                @if(count($banners)>0)
 
                 <!-- Single Catagory -->
                 @foreach($categories as $category)
@@ -58,12 +58,12 @@
                     </div>
                 </div>
                 @endforeach
+                @endif
 
             </div>
         </div>
     </div>
 
-    @endif
     <!-- Top Catagory Area -->
 
     <!-- Quick View Modal Area -->
@@ -196,6 +196,7 @@
                                 <p class="brand_name">{{\App\Models\Brand::where('id',$new_product->brand_id)->value('title')}}</p>
                                 <a href="{{route('product.details',$new_product->slug)}}">{{ucfirst($new_product->title)}}</a>
                                 <h6 class="product-price">${{number_format($new_product->offer_price,2)}} <small><del class="text-danger">${{number_format($new_product->price,2)}}</del></small></h6>
+
                             </div>
                         </div>
                         @endforeach
